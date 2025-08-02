@@ -166,7 +166,7 @@ If the number of cycles is greater than one, the models were trained **separatel
 The purpose of freezing layers as the training cycles progress is to investigate whether **targeted training of layers** influences the model’s performance.
 
 ---
-
+<img width="880" height="435" alt="image" src="https://github.com/user-attachments/assets/70cd1fa2-3ab2-4354-9a17-63df08169f80" />
 **Figure 7:** Schematic representation of the training process showing how individual layers are "frozen" or excluded from training.
 
 For models 3, 4, 9, and 10, an additional training step was conducted. After the cycle-based training, the models were further trained with a dataset that combined **all conditions**, without freezing network layers separately.  
