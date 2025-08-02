@@ -30,13 +30,11 @@ $$
 
 Expanded, this results in:
 
-$$
-L_{Lagrange} = \left| (m_1+m_2) \ddot{\theta}_1 l_1^2 + m_2 l_1^2 \ddot{\theta}_2 l_2^2 \cos(\theta_1 - \theta_2) 
-+ m_2 l_1^2 \dot{\theta}_2^2 l_2^2 \sin(\theta_1 - \theta_2) 
-+ (m_1+m_2) g l_1 \sin(\theta_1) \right| 
-+ \left| \ddot{\theta}_2 l_2 + \ddot{\theta}_1 l_1^2 l_2 \cos(\theta_1 - \theta_2) 
-- \ddot{\theta}_1 l_1^2 l_2 \sin(\theta_1 - \theta_2) + g \sin(\theta_2) \right| \tag{19}
-$$
+$$L_{Lagrange} = \left| (m_1+m_2) \ddot{\theta}_1 l_1^2 + m_2 l_1^2 \ddot{\theta}_2 l_2^2 \cos(\theta_1 - \theta_2)
++ m_2 l_1^2 \dot{\theta}_2^2 l_2^2 \sin(\theta_1 - \theta_2)
++ (m_1+m_2) g l_1 \sin(\theta_1) \right|
++ \left| \ddot{\theta}_2 l_2 + \ddot{\theta}_1 l_1^2 l_2 \cos(\theta_1 - \theta_2)
+- \ddot{\theta}_1 l_1^2 l_2 \sin(\theta_1 - \theta_2) + g \sin(\theta_2) \right| \tag{19}$$
 
 A drawback of this method is the occurrence of the second derivatives $\ddot{\theta}_1$ and $\ddot{\theta}_2$, which must first be computed, since the model only predicts the first derivatives of the angles. This issue can be solved by numerical differentiation using the difference quotient, where the angular velocity of the previous state $\dot{\theta}_i(t-\Delta t)$, the predicted $\dot{\theta}_i(t)$, and the time step $\Delta t$ are used:
 
