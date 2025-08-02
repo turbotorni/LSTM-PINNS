@@ -42,7 +42,7 @@ Substituting the previously mentioned variables, this leads to:
 
 By applying this function to the **Euler-Lagrange equation**:
 
-$$\frac{d}{dt} \frac{\partial L}{\partial \dot{\theta}_i} - \frac{\partial L}{\partial \theta_i} = 0 \tag{11}$$
+<img width="175" height="65" alt="image" src="https://github.com/user-attachments/assets/767ef3b6-02fd-49f5-ba49-20ea78c72db4" />
 
 where $\frac{d}{dt}$ is the **time derivative**, $\frac{\partial L}{\partial \theta_i}$ is the **derivative with respect to the deflection angle** of the first or second pendulum, and $\frac{\partial L}{\partial \dot{\theta}_i}$ is the **derivative of the Lagrangian function with respect to the angular velocity** of the first or second pendulum, the angular acceleration for the first pendulum rod, $\ddot{\theta}_1$, follows:
 
