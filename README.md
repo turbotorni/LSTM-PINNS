@@ -4,7 +4,7 @@
 
 In the following, we derive the approaches for physics-informed loss functions using a double pendulum (Figure 6a) and one-dimensional thermal diffusion (Figure 6b). These approaches are later tested and compared with classical ML models in **Chapter 5: Evaluation and Interpretation**.
 
-<img width="929" height="430" alt="image" src="https://github.com/user-attachments/assets/3771c539-6c9d-43ab-81f0-bb89772b7a08" />
+<img width="813" height="398" alt="image" src="https://github.com/user-attachments/assets/293e373e-7a31-49ca-8641-761110d4a0e8" />
 
 **Figure 6**: Introduction of the model systems  
 
