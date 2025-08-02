@@ -1,4 +1,4 @@
-### 3.1.2 Integration of Physical Properties
+### Integration of Physical Properties
 
 To implement physical constraints that the model can use during learning, the double pendulum was assumed to be a conservative system. Therefore, **energy conservation** and compliance with the **Lagrange equation** were defined as physical constraints.
 
@@ -31,7 +31,7 @@ A drawback of this method is the occurrence of the second derivatives $\ddot{\th
 <img width="210" height="66" alt="image" src="https://github.com/user-attachments/assets/7c747592-edf0-4eed-99d1-56b0710facd8" />
 
 
-Alternatively, the derivative can be computed using the `torch.autograd` function from the PyTorch library.
+Alternatively, the derivative can be computed using the `torch.autograd` function from the PyTorch library. However the analytic method has been used to gain a better understanding of the lossfunction.
 
 ---
 
@@ -43,44 +43,27 @@ To examine whether the integration of physical information can be transferred to
 
 The heat equation introduced in [11], reduced to a one-dimensional problem with $T$ as local temperature, $\alpha$ as thermal diffusivity, and $x$ as spatial coordinate, is given by:
 
-$$
-\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2} \tag{21}
-$$
+<img width="114" height="56" alt="image" src="https://github.com/user-attachments/assets/8ab1b71a-84b9-4a4c-bf46-799b647706eb" />
 
 For the numerical solution of this partial differential equation, the Taylor expansion is used to approximate the solution. Thus, the second derivative of the temperature with respect to the node coordinate $x$, with $\Delta x$ as the node spacing, is:
 
-$$
-\frac{\partial^2 T}{\partial x^2} = \frac{1}{(\Delta x)^2} \left[ T_{x+\Delta x}^t - 2 T_x^t + T_{x-\Delta x}^t \right] \tag{22}
-$$
+<img width="320" height="59" alt="image" src="https://github.com/user-attachments/assets/f003df4a-d249-4ce9-9e08-57fb6903219b" />
 
 For the time derivative using the difference quotient:
 
-$$
-\frac{\partial T}{\partial t} = \frac{T_x^{t+1} - T_x^t}{\Delta t} \tag{23}
-$$
+<img width="139" height="55" alt="image" src="https://github.com/user-attachments/assets/25aa4458-c984-45f2-9db2-38fb59cf50ff" />
 
 Thus, the numerical solution of the heat equation is:
 
-$$
-\frac{T_x^{t+1} - T_x^t}{\Delta t} 
-= \frac{\alpha}{(\Delta x)^2} \left[ T_{x+\Delta x}^t - 2 T_x^t + T_{x-\Delta x}^t \right] \tag{24}
-$$
+<img width="367" height="59" alt="image" src="https://github.com/user-attachments/assets/e431c6e9-37d0-46cf-b1e9-85f38c5d83f2" />
 
 Assuming an adiabatic boundary condition, the heat flux is $ \dot{q} = 0 $, since no heat can leave the system. From Fourier’s law, with $\lambda$ as the thermal conductivity:
 
-$$
-\dot{q} = \lambda \frac{\partial T}{\partial x} \tag{25}
-$$
+<img width="94" height="56" alt="image" src="https://github.com/user-attachments/assets/657d7b44-9b9e-4353-a30b-a25bc022d478" />
 
 the boundary conditions at the rod ends [11] are:
 
-$$
-\left. \frac{\partial T}{\partial x} \right|_{x=0} = 0 \tag{26}
-$$
-
-$$
-\left. \frac{\partial T}{\partial x} \right|_{x=L} = 0 \tag{27}
-$$
+<img width="106" height="130" alt="image" src="https://github.com/user-attachments/assets/e71b4606-d3f4-4493-b169-d31b03b4823c" />
 
 Training data was generated using the numerical solution and these boundary conditions.
 
@@ -92,38 +75,25 @@ As with the double pendulum, physics can be embedded by checking for compliance 
 
 To incorporate the boundary conditions into the heat equation, the equation is extended by $\Delta x$:
 
-$$
-\frac{\partial T}{\partial t} \cdot \Delta x 
-= \alpha \frac{\partial^2 T}{\partial x^2} \cdot \Delta x \tag{28}
-$$
+<img width="188" height="55" alt="image" src="https://github.com/user-attachments/assets/a9871347-1346-4d21-ab05-c1cce118d0d4" />
 
 Integrating over the entire length $L$:
 
-$$
-\int_0^L \frac{\partial T}{\partial t} \, dx 
-= \left[ \alpha \frac{\partial T}{\partial x} \right]_0^L \tag{29}
-$$
+<img width="195" height="69" alt="image" src="https://github.com/user-attachments/assets/974d42c7-b64b-4b16-b2b6-350fcfc44b26" />
 
 Considering the adiabatic boundary conditions yields:
 
-$$
-\int_0^L \frac{\partial T}{\partial t} \, dx = 0 \tag{30}
-$$
+<img width="130" height="66" alt="image" src="https://github.com/user-attachments/assets/7b2a3af8-cc95-477f-9293-3e9d147416a4" />
 
 The numerical expression for the loss function, with $n$ as the number of nodes, $t$ as the total number of time steps, $\Delta x$ as the node spacing, and $T$ as the nodal temperature, is:
 
-$$
-L_{Energy} = \sum_{i=0}^{t} \sum_{j=1}^{n} (T_{i,j} - T_{i+1,j}) \cdot \Delta x \tag{31}
-$$
+<img width="369" height="74" alt="image" src="https://github.com/user-attachments/assets/ff9d452b-31ce-42a0-b118-d679b73a8fc4" />
 
 #### Compliance with the Heat Equation
 
 Another approach is to enforce compliance with the heat equation. To integrate it into the training, the equation can be rearranged to identify deviations. The loss is thus:
 
-$$
-L_{1D-Diffusion} = \left| \frac{T_x^{t+1} - T_x^t}{\Delta t} - \frac{\alpha}{(\Delta x)^2} 
-\left[ T_{x+\Delta x}^t - 2 T_x^t + T_{x-\Delta x}^t \right] \right| \tag{32}
-$$
+<img width="598" height="61" alt="image" src="https://github.com/user-attachments/assets/23295440-562b-4a7c-b532-8ba738a38fd9" />
 
 Here, the initial temperature is compared with the predicted temperature across the nodes and penalized if necessary. It is important to consider the boundary conditions when integrating the physical loss function, as otherwise disproportionately large losses can occur at the boundaries.
 
