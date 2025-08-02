@@ -430,3 +430,9 @@ In addition to the parameter studies, we extended the integration of physical la
 Among themselves, the different variants of the physics-informed networks show only minor differences.
 
 Since all models underwent the same training duration of 700 epochs, it's evident that the physics-informed models learned significantly more efficiently under these conditions than the purely data-driven model. This observation is particularly relevant for applications where training resources are limited.
+
+#Used Literature
+[10]  R. B. L. a. S. M. Tan, "Double pendulum: An experiment in chaos," Picarro Inc., Santa Clara, California, U.S.A., 1993. 
+[11]  H. D. Baehr und K. Stephan, Wärme- und Stoffübertragung, Stuttgart: Springer Vieweg, 2016. 
+[12]  D. Gannon, „Deep Learning with Real Data and the Chaotic Double Pendulum,“ Research Gate, School of Informatics, Computing and Engineering, Indiana University, USA, 2021. 
+[22]  G. Gonzalez, "Single and Double plane pendulum," Louisiana State University, Baton Rouge, LA, USA. 
