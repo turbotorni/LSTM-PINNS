@@ -9,6 +9,9 @@ The total energy $E_i$ is calculated from the kinetic energy $K$ and the potenti
 
 <img width="111" height="24" alt="image" src="https://github.com/user-attachments/assets/5bb1bb5f-c2c4-4e67-a06f-e1afa833bca4" />
 
+$$
+\left (E_i) = \right(K)+\right(V)
+$$
 
 If energy conservation holds, the energy difference between each time step should be zero, provided the data do not include dynamics with different initial conditions. Accordingly, the following term applies to the loss function, where $E_{i+1}$ is the energy of the predicted state and $E_i$ is the original energy:
 
