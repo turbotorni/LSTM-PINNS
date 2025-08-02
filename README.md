@@ -346,7 +346,7 @@ Following these test series, which are close to the training data, another serie
 | 6. | 4.3 | -0.14 | 0.95 | 0.19 |
 | 7. | 8.4 | -0.32 | -2.2 | 0.55 |
 
-For evaluation, we examine the deviations between predicted and actual values of the four state variables (`theta1`, `theta2`, `omega1`, `omega2`) for each test run. These deviations were calculated using the **Mean Absolute Deviation (MAE)** from `Equation X` (please specify the equation number here if it exists in your original document). Since deviations are calculated using unscaled data, we must consider the mean deviation of angles and angular velocities separately due to unit differences.
+For evaluation, we examine the deviations between predicted and actual values of the four state variables (`theta1`, `theta2`, `omega1`, `omega2`) for each test run. These deviations were calculated using the **Mean Absolute Deviation (MAE)**. Since deviations are calculated using unscaled data, we must consider the mean deviation of angles and angular velocities separately due to unit differences.
 
 **Figure 17** summarizes the trained models from `Table 2` (please ensure this table exists and is correctly referenced) by their MAE for `theta1`, `theta2`, `omega1`, and `omega2` across the different test runs in a heatmap. The heatmap represents the data as a color-coded matrix, where MAE values are shown through varying color intensities. This allows for easy visual identification of models with low (better) and high (worse) deviations. Additionally, we've included further thresholds to better visualize the models' functionality in different MAE ranges and to more clearly differentiate their performance within specific value ranges. For better understanding of these thresholds, **Figure 16** provides a representative display of the actual and predicted pendulum motion for models that can be assigned to the existing threshold ranges.
 
@@ -435,4 +435,7 @@ Since all models underwent the same training duration of 700 epochs, it's eviden
 [10]  R. B. L. a. S. M. Tan, "Double pendulum: An experiment in chaos," Picarro Inc., Santa Clara, California, U.S.A., 1993. 
 [11]  H. D. Baehr und K. Stephan, Wärme- und Stoffübertragung, Stuttgart: Springer Vieweg, 2016. 
 [12]  D. Gannon, „Deep Learning with Real Data and the Chaotic Double Pendulum,“ Research Gate, School of Informatics, Computing and Engineering, Indiana University, USA, 2021. 
+[14]  T. Taulli, Grundlagen der Künstlichen Intelligenz - Eine nichttechnische Einführung, Monrovia: Springer, 2022.  
+[16]  E. Hossain, Machine Learning Crash Course for Engineers, Boise, ID, USA: Springer, 2024.  
 [22]  G. Gonzalez, "Single and Double plane pendulum," Louisiana State University, Baton Rouge, LA, USA. 
+[23]  S. Alam, B. Gower and N. Mueller, "Numerical modeling of heat transfer mechanism in remote sensing bulb of thermal expansion valves," Elsevier Masson SAS., East Lansing, 48824, MI, USA, 2024. 
