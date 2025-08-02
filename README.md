@@ -9,16 +9,9 @@ The total energy $E_i$ is calculated from the kinetic energy $K$ and the potenti
 
 <img width="111" height="24" alt="image" src="https://github.com/user-attachments/assets/5bb1bb5f-c2c4-4e67-a06f-e1afa833bca4" />
 
-$$
-\left(E_i) \right(K)+\right(V)
-$$
-
 If energy conservation holds, the energy difference between each time step should be zero, provided the data do not include dynamics with different initial conditions. Accordingly, the following term applies to the loss function, where $E_{i+1}$ is the energy of the predicted state and $E_i$ is the original energy:
 
-$$
-L_{\text{Energy}} = \lvert E_{i+1} - E_i \rvert \tag{17}
-$$
-
+<img width="277" height="32" alt="image" src="https://github.com/user-attachments/assets/087fb312-53a0-45b5-99e8-ae377525ed6a" />
 
 ### Compliance with the Lagrange Equation
 
@@ -26,23 +19,17 @@ For compliance with the Lagrange equation, no comparison to the previous step is
 
 Since two angles are present, the Euler-Lagrange equation is applied separately to both pendulums. Thus, the physics-informed loss function of the PINN is given by:
 
-$$
-L_{Lagrange} = \sum_{i=1}^{2} \left| \frac{d}{dt}\frac{\partial L}{\partial \dot{\theta}_i} - \frac{\partial L}{\partial \theta_i} \right| \tag{18}
-$$
+<img width="275" height="75" alt="image" src="https://github.com/user-attachments/assets/deba7423-1b99-4d81-a812-bfd09a67199a" />
+
 
 Expanded, this results in:
 
-$$L_{Lagrange} = \left| (m_1+m_2) \ddot{\theta}_1 l_1^2 + m_2 l_1^2 \ddot{\theta}_2 l_2^2 \cos(\theta_1 - \theta_2)
-+ m_2 l_1^2 \dot{\theta}_2^2 l_2^2 \sin(\theta_1 - \theta_2)
-+ (m_1+m_2) g l_1 \sin(\theta_1) \right|
-+ \left| \ddot{\theta}_2 l_2 + \ddot{\theta}_1 l_1^2 l_2 \cos(\theta_1 - \theta_2)
-- \ddot{\theta}_1 l_1^2 l_2 \sin(\theta_1 - \theta_2) + g \sin(\theta_2) \right| \tag{19}$$
+<img width="681" height="115" alt="image" src="https://github.com/user-attachments/assets/8d2db583-796a-49a7-bcce-2db2d0439a6e" />
 
 A drawback of this method is the occurrence of the second derivatives $\ddot{\theta}_1$ and $\ddot{\theta}_2$, which must first be computed, since the model only predicts the first derivatives of the angles. This issue can be solved by numerical differentiation using the difference quotient, where the angular velocity of the previous state $\dot{\theta}_i(t-\Delta t)$, the predicted $\dot{\theta}_i(t)$, and the time step $\Delta t$ are used:
 
-$$
-\ddot{\theta}_i = \frac{\dot{\theta}_i(t+\Delta t) - \dot{\theta}_i(t)}{\Delta t} \tag{20}
-$$
+<img width="210" height="66" alt="image" src="https://github.com/user-attachments/assets/7c747592-edf0-4eed-99d1-56b0710facd8" />
+
 
 Alternatively, the derivative can be computed using the `torch.autograd` function from the PyTorch library.
 
