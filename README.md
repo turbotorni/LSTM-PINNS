@@ -290,7 +290,7 @@ For evaluation, we examine the deviations between predicted and actual values of
 
 From the heatmap in **Figure 17**, it's evident that training models by specifically focusing on only one initial condition per cycle (see Models 5 and 6) can yield good results in tests with known energies. Further improvement can be achieved through additional training, as seen in Models 3 and 4, which were trained again with a mix of already trained initial conditions. Despite this, predictions in tests on an unknown system energy remain of limited representativeness due to the large mean absolute deviations of angular velocities.
 
-<img width="953" height="616" alt="image" src="https://github.com/user-attachments/assets/c4fd666b-ee1f-496e-ad54-30a168728da4" />
+<img width="831" height="524" alt="image" src="https://github.com/user-attachments/assets/d2e3b378-0100-4dca-bd27-87c46268c794" />
 
 **Figure 17: Heatmap comparing models using mean absolute deviations across corresponding test runs**
 
@@ -339,7 +339,7 @@ The evaluation, as described in Chapter 5.3 (please ensure this chapter exists a
 
 Models trained on various initial conditions generally perform worse than those whose training included model parameter combinations. However, models trained on different model parameters also struggle with predicting values. For models 9 to 12, only the test run with known model parameter combinations is representative. The **training method** in combination with the **model's dimensions** proves to be a crucial factor for model performance and should not be overlooked.
 
-<img width="920" height="575" alt="image" src="https://github.com/user-attachments/assets/90d987b3-5395-42ee-9068-2a824f9a5be2" />
+<img width="787" height="490" alt="image" src="https://github.com/user-attachments/assets/6f7796cf-f03e-4370-ac2f-fdf6d47badf6" />
 
 **Figure 19: Heatmap comparing models using mean absolute deviations across corresponding test runs**
 
