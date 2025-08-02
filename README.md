@@ -7,9 +7,8 @@ To implement physical constraints that the model can use during learning, the do
 To check whether the double pendulum respects energy conservation, the total energy of the system at time $t$ is compared with the energy of the predicted state at time $t+1$.  
 The total energy $E_i$ is calculated from the kinetic energy $K$ and the potential energy $V$ of the system:
 
-$$
-\left E_{i} \right K + \right V \tag{16}
-$$
+<img width="111" height="24" alt="image" src="https://github.com/user-attachments/assets/5bb1bb5f-c2c4-4e67-a06f-e1afa833bca4" />
+
 
 If energy conservation holds, the energy difference between each time step should be zero, provided the data do not include dynamics with different initial conditions. Accordingly, the following term applies to the loss function, where $E_{i+1}$ is the energy of the predicted state and $E_i$ is the original energy:
 
