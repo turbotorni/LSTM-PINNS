@@ -1,4 +1,4 @@
-
+****
 *Note: The original report has been written in German. I translated an the most crucial part of the report to english to get a better understanding of the code, however the plottitles and labels remained German, but I tried to make the plots easy to understand.
 # 3. Model Systems
 
@@ -430,6 +430,27 @@ In addition to the parameter studies, we extended the integration of physical la
 Among themselves, the different variants of the physics-informed networks show only minor differences.
 
 Since all models underwent the same training duration of 700 epochs, it's evident that the physics-informed models learned significantly more efficiently under these conditions than the purely data-driven model. This observation is particularly relevant for applications where training resources are limited.
+
+# Conclusion and Outlook
+
+This investigation into Physics-Informed Neural Networks (PINNs) in the context of the double pendulum and thermal diffusion has yielded several significant findings.
+
+Comparing the data-driven model from [12] (used as a benchmark) with physics-informed models, under the same training conditions, demonstrated a **positive influence of physical information on the prediction accuracy of the models**. Within two parameter studies, we attempted to generalize the PINNs to multiple initial conditions and model parameters. While some models could accurately predict various movement dynamics depending on initial conditions, the results for predicting different dynamics based on varying model parameters were poorer. This highlighted limitations in the models' generalization capabilities.
+
+In comparison to the models trained on thermal diffusion, the **efficiency of PINNs in training was notable**. They learned significantly faster than purely data-driven models within the same training duration of 700 epochs. This underscores the practical utility of such models for applications where training resources are limited. By integrating physical domain knowledge, we could not only create more precise models but also utilize available training data and computational resources more efficiently.
+
+For future research, several promising development opportunities arise:
+
+* A natural extension would be the application of PINNs to thermal diffusion problems with **non-adiabatic boundary conditions**.
+* Another possibility is to transfer PINNs to **two-dimensional thermal diffusion problems**, which would make the models useful for more complex real-world scenarios.
+
+Regarding the double pendulum, the results from tests in the chaotic state show an interesting discrepancy. Although PINNs and the benchmark model exhibited clear performance differences in the non-chaotic range, they produced similar results under chaotic conditions, meaning no improvement was gained from PINNs. This observation suggests that the challenge of the chaotic state may not primarily lie in the integration of physical information but could have other causes. Therefore, a promising research direction would be a targeted investigation of the models in **chaotic movement scenarios**.
+
+One approach could be to **increase the temporal resolution of the training data**. Finer time steps would provide the models with more precise input data, which could help in predicting chaotic pendulum movements. Furthermore, an investigation to clarify the discrepancy between the parameter studies—where models learned various model parameter combinations less effectively than initial conditions—would be interesting. Here, examining the **differences in kinetic energy** under various initial conditions and different model parameters could be valuable to rule out that the parameter combinations resulted in excessively large energy differences for the models' predictions. It's possible that the mixing of parameters led to larger energy differences compared to altered initial conditions, which could explain the disparate model performances.
+
+Additionally, as noted in **Section 5.1.2 "Training Process: MSE and MAE Loss Functions Compared,"** the data losses had almost no influence on the total loss. Therefore, investigating the **potential of PINNs for unsupervised learning** would also be interesting, where random input data is used and the model is trained solely through the physical loss functions.
+
+Overall, it's evident that the further development of Physics-Informed Neural Networks holds **potential for modeling physical systems**, but also exhibits limitations, as observed in the parameter studies.
 
 #Used Literature
 [10]  R. B. L. a. S. M. Tan, "Double pendulum: An experiment in chaos," Picarro Inc., Santa Clara, California, U.S.A., 1993. 
