@@ -331,9 +331,11 @@ In addition to the parameter studies, we extended the integration of physical la
 **Figure 20** displays the 3D plots. In this case, the color scaling does not represent temperature but rather the **absolute deviation from the simulation results**. It's clearly visible that the data-based model exhibits the largest deviations, particularly in areas with large gradients and towards the end of the simulation period. In contrast, the physics-informed models provide significantly more precise predictions across the entire simulation range. In this plot, there's hardly any difference between the model informed by heat energy conservation and the model informed by the heat equation. It's also noteworthy that the inflection point in the sine curve's temperature distribution shows very low deviation in all three predictions. Since the error development over the simulation time is not clearly evident from the color coding alone, **Figure 21** provides a clearer illustration. The difference between data-based and physics-informed models becomes even more apparent. Interestingly, the error of the data-based model drops sharply again before increasing.
 
 <img width="327" height="1027" alt="image" src="https://github.com/user-attachments/assets/6fa8c7c2-bd8d-4e77-a711-6188c136c577" />
+
 **Figure 20: 3D Plots of Absolute Deviation from Simulation Results)**
 
 <img width="747" height="290" alt="image" src="https://github.com/user-attachments/assets/27b64acc-b773-4912-825d-e36e8b060dcb" />
+
 **Figure 21: Error development of the different models over the simulation period**
 
 Among themselves, the different variants of the physics-informed networks show only minor differences.
