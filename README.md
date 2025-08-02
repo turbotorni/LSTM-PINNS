@@ -1,4 +1,69 @@
-## Integration of Physical Properties (Which equations have been used)
+
+*Note: The original report has been written in German. I translated an the most crucial part of the report to english to get a better understanding of the code, however the plottitles and labels remained German, but I tried to make the plots easy to understand.
+## 3. Model Systems
+
+In the following, we derive the approaches for physics-informed loss functions using a double pendulum (Figure 6a) and one-dimensional thermal diffusion (Figure 6b). These approaches are later tested and compared with classical ML models in **Chapter 5: Evaluation and Interpretation**.
+
+<img width="929" height="430" alt="image" src="https://github.com/user-attachments/assets/3771c539-6c9d-43ab-81f0-bb89772b7a08" />
+
+**Figure 6**: Introduction of the model systems  
+
+Both systems enable a targeted investigation of physics-informed loss functions and serve as benchmarks for evaluating machine learning approaches in physical simulations.  
+The double pendulum is an example of a nonlinear, chaotic system, as it reacts sensitively to changes in initial conditions, making its motion difficult to predict.  
+In contrast, one-dimensional thermal diffusion is described by a linear partial differential equation, which is an advantage for ML models since linear systems are generally easier to learn and predict [10, 11].
+
+# 3.1 The Double Pendulum
+
+For comparing neural networks with physics-informed networks, we used the ML model created by Dennis Gannon for simulating a double pendulum as a **benchmark** [12]. Gannon's paper highlights that while LSTM networks perform well for simple systems like predicting a projectile's trajectory, they quickly reach their limits in more complex applications like the double pendulum, which exhibits chaotic behavior, allowing for precise prediction only for a few seconds [10].
+
+---
+
+## 3.1.1 Dynamics of a Double Pendulum
+
+The dynamics of a double pendulum, as derived in [22], can be analytically determined using the **Lagrange equation**. This yields two solutions: one for the first pendulum and one for the second.
+
+Let $m_1$ and $m_2$ be the **masses**, $l_1$ and $l_2$ the **lengths** of the pendulum segments, $\theta_1$ and $\theta_2$ the **deflection angles** from the vertical axis, and $\dot{\theta}_1$ and $\dot{\theta}_2$ the **angular velocities** of the individual pendulums.
+
+The **kinetic energy** $K$ for the double pendulum is generally given by:
+
+<img width="575" height="63" alt="image" src="https://github.com/user-attachments/assets/b03a7fe6-8302-4db8-98b9-80b98a0cb1b4" />
+
+And for the **potential energy** $V$:
+
+<img width="465" height="30" alt="image" src="https://github.com/user-attachments/assets/e18972e5-4b01-4681-bde7-d952f40cb8f8" />
+
+Using the terms for kinetic energy $K$ and potential energy $V$, the **Lagrangian function** $L$ can be derived:
+
+<img width="114" height="28" alt="image" src="https://github.com/user-attachments/assets/c93abf5f-f1cd-41fc-b69a-b67327fa8713" />
+
+Substituting the previously mentioned variables, this leads to:
+
+<img width="550" height="97" alt="image" src="https://github.com/user-attachments/assets/d106c99c-f8bd-40ba-8910-ec95b9729a87" />
+
+By applying this function to the **Euler-Lagrange equation**:
+
+$$\frac{d}{dt} \frac{\partial L}{\partial \dot{\theta}_i} - \frac{\partial L}{\partial \theta_i} = 0 \tag{11}$$
+
+where $\frac{d}{dt}$ is the **time derivative**, $\frac{\partial L}{\partial \theta_i}$ is the **derivative with respect to the deflection angle** of the first or second pendulum, and $\frac{\partial L}{\partial \dot{\theta}_i}$ is the **derivative of the Lagrangian function with respect to the angular velocity** of the first or second pendulum, the angular acceleration for the first pendulum rod, $\ddot{\theta}_1$, follows:
+
+<img width="702" height="82" alt="image" src="https://github.com/user-attachments/assets/6361f7a7-4255-4efa-8236-a72c1a044463" />
+
+And for the second pendulum rod:
+
+<img width="531" height="68" alt="image" src="https://github.com/user-attachments/assets/ca57c3fc-fce0-444e-9005-8badbd7b0b2b" />
+
+By substituting $\theta_1, \dot{\theta}_1, \theta_2$ and $\dot{\theta}_2$ with $u_1, u_2, u_3$ and $u_4$, we get $u$:
+
+<img width="91" height="111" alt="image" src="https://github.com/user-attachments/assets/397afa74-d37a-4dec-be1a-7f9ff93f76fa" />
+
+
+Taking the time derivative and solving the system of equations consisting of $\ddot{\theta}_1$ and $\ddot{\theta}_2$, we get $\dot{u}$ with $c = \cos(\theta_1-\theta_2)$ and $s = \sin(\theta_1-\theta_2)$:
+
+<img width="616" height="189" alt="image" src="https://github.com/user-attachments/assets/8f063f01-c69a-4ada-981a-5b16e9184818" />
+
+The training data for the pendulum was generated using this approach, where $u$ corresponds to the **initial conditions**.
+
+# Integration of Physical Properties (Which equations have been used)
 
 To implement physical constraints that the model can use during learning, the double pendulum was assumed to be a conservative system. Therefore, **energy conservation** and compliance with the **Lagrange equation** were defined as physical constraints.
 
