@@ -254,9 +254,10 @@ To ensure a consistent comparison with the ML model for double pendulum dynamics
 
 Among the trained models, significant differences are immediately apparent. Notably, the model trained solely on data shows large deviations from the simulated pendulum. **Figure 8** illustrates the pendulum's motion at four different time points (25%, 50%, 75%, and 100% of the total time). The simulated motion approximates the real double pendulum movement and serves as the reference for comparing neural network predictions.
 
-* "Data-based" refers to the position predicted by the conventional ML model.
-* "Energy Conservation" refers to the model trained with the physical information of energy conservation.
-* "Lagrange" refers to the model that incorporates the Lagrange formalism.
+* "Actual Movement" (blue) refers to the position predicted by the conventional ML model.
+* "Data-based" (green) refers to the position predicted by the conventional ML model.
+* "Energy Conservation" (red) refers to the model trained with the physical information of energy conservation.
+* "Lagrange" (purple) refers to the model that incorporates the Lagrange formalism.
 
 <img width="688" height="370" alt="image" src="https://github.com/user-attachments/assets/9b5a85df-8d71-4550-9c79-fe35ae70a263" />
 
