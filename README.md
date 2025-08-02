@@ -453,11 +453,12 @@ Additionally, as noted in **Section 5.1.2 "Training Process: MSE and MAE Loss Fu
 
 Overall, it's evident that the further development of Physics-Informed Neural Networks holds **potential for modeling physical systems**, but also exhibits limitations, as observed in the parameter studies.
 
-#Used Literature
-[10]  R. B. L. a. S. M. Tan, "Double pendulum: An experiment in chaos," Picarro Inc., Santa Clara, California, U.S.A., 1993. 
-[11]  H. D. Baehr und K. Stephan, Wärme- und Stoffübertragung, Stuttgart: Springer Vieweg, 2016. 
-[12]  D. Gannon, „Deep Learning with Real Data and the Chaotic Double Pendulum,“ Research Gate, School of Informatics, Computing and Engineering, Indiana University, USA, 2021. 
-[14]  T. Taulli, Grundlagen der Künstlichen Intelligenz - Eine nichttechnische Einführung, Monrovia: Springer, 2022.  
-[16]  E. Hossain, Machine Learning Crash Course for Engineers, Boise, ID, USA: Springer, 2024.  
-[22]  G. Gonzalez, "Single and Double plane pendulum," Louisiana State University, Baton Rouge, LA, USA. 
-[23]  S. Alam, B. Gower and N. Mueller, "Numerical modeling of heat transfer mechanism in remote sensing bulb of thermal expansion valves," Elsevier Masson SAS., East Lansing, 48824, MI, USA, 2024. 
+# Used Literature
+
+* [10] R. B. L. a. S. M. Tan, "Double pendulum: An experiment in chaos," Picarro Inc., Santa Clara, California, U.S.A., 1993.
+* [11] H. D. Baehr and K. Stephan, *Wärme- und Stoffübertragung* (Heat and Mass Transfer), Stuttgart: Springer Vieweg, 2016.
+* [12] D. Gannon, "Deep Learning with Real Data and the Chaotic Double Pendulum," Research Gate, School of Informatics, Computing and Engineering, Indiana University, USA, 2021.
+* [14] T. Taulli, *Grundlagen der Künstlichen Intelligenz - Eine nichttechnische Einführung* (Foundations of Artificial Intelligence - A Non-Technical Introduction), Monrovia: Springer, 2022.
+* [16] E. Hossain, *Machine Learning Crash Course for Engineers*, Boise, ID, USA: Springer, 2024.
+* [22] G. Gonzalez, "Single and Double plane pendulum," Louisiana State University, Baton Rouge, LA, USA.
+* [23] S. Alam, B. Gower and N. Mueller, "Numerical modeling of heat transfer mechanism in remote sensing bulb of thermal expansion valves," Elsevier Masson SAS., East Lansing, 48824, MI, USA, 2024.
