@@ -1,4 +1,4 @@
-### Integration of Physical Properties
+## Integration of Physical Properties (Which equations have been used)
 
 To implement physical constraints that the model can use during learning, the double pendulum was assumed to be a conservative system. Therefore, **energy conservation** and compliance with the **Lagrange equation** were defined as physical constraints.
 
@@ -96,4 +96,79 @@ Another approach is to enforce compliance with the heat equation. To integrate i
 <img width="598" height="61" alt="image" src="https://github.com/user-attachments/assets/23295440-562b-4a7c-b532-8ba738a38fd9" />
 
 Here, the initial temperature is compared with the predicted temperature across the nodes and penalized if necessary. It is important to consider the boundary conditions when integrating the physical loss function, as otherwise disproportionately large losses can occur at the boundaries.
+
+## Training Methodology
+
+This chapter presents the different training approaches and their practical implementation for the double pendulum and thermal diffusion problems. Particular emphasis is placed on the investigation of different network architectures and the execution of parameter studies to optimize model performance.  
+The neural networks were implemented using the Python library **PyTorch**.
+
+---
+
+### Preparation of Training Data
+
+Since the training data originates from simulation data and is therefore ordered, the data within the training batches is called randomly during training. This avoids biased results in which the model detects structures too early in the dataset [14].  
+Because our model is trained on more than one variable, the data must also be **scaled** prior to training, as each variable spans a different range between its minimum and maximum values.  
+For this purpose, the data is **normalized**, i.e., the dataset’s value range is mapped proportionally from an arbitrary numerical range to either $[0,1]$ or $[-1,1]$ [16].
+
+---
+
+### Network Architecture and Dimensions
+
+In principle, the network architectures for the ML model of the double pendulum and for thermal diffusion are similar; however, the parameters differ.  
+- For the **double pendulum**, the input and output layers consist of $\theta_1$, $\dot{\theta}_1$, $\theta_2$, and $\dot{\theta}_2$, combined in the vector $u$. The layer size is therefore 4.  
+- For the **one-dimensional diffusion**, the size of the input and output layers corresponds to the number of nodes, which in this case is 60.  
+
+The hidden layers in both cases consist of 100 nodes (or LSTM cells).  
+The number of hidden layers was determined depending on the size of the training dataset. In the parameter study, this number is variable (see Table 2).  
+In the comparison with the benchmark from [12], the neural network had only one hidden layer.
+
+---
+
+### ML Models of the Parameter Studies
+
+Two parameter studies were conducted:  
+1. Training and testing on seven different **initial conditions**.  
+2. Training and testing on eight different **double pendulum parameter combinations**.  
+
+Within this study, different neural networks with varying dimensions were created. Their specifications are shown in Table 2.  
+The model names are composed of the columns, joined with an underscore.  
+For example, the designation for model number 1 is:  
+`Lagrange_3_3000x1_InitialCondition`.  
+The numbering is for convenience to allow precise referencing of each model.
+
+---
+
+### Table 2: Neural Networks Trained for the Parameter Studies
+
+| No. | Property         | Hidden Layers | Training Epochs × Cycles | Training Variation |
+|-----|------------------|---------------|--------------------------|--------------------|
+| 1   | Lagrange         | 3             | 3000 × 1                 | Initial Condition  |
+| 2   | Energy Conserv.  | 3             | 3000 × 1                 | Initial Condition  |
+| 3   | Lagrange         | 7             | 1000 × 7 + 2000 × 1      | Initial Condition  |
+| 4   | Energy Conserv.  | 7             | 1000 × 7 + 2000 × 1      | Initial Condition  |
+| 5   | Lagrange         | 7             | 1000 × 7                 | Initial Condition  |
+| 6   | Energy Conserv.  | 7             | 1000 × 7                 | Initial Condition  |
+| 7   | Lagrange         | 3             | 3000 × 1                 | Model Parameters   |
+| 8   | Energy Conserv.  | 3             | 3000 × 1                 | Model Parameters   |
+| 9   | Lagrange         | 8             | 700 × 8 + 6000 × 1       | Model Parameters   |
+| 10  | Energy Conserv.  | 8             | 700 × 8 + 6000 × 1       | Model Parameters   |
+| 11  | Lagrange         | 8             | 700 × 8                  | Model Parameters   |
+| 12  | Energy Conserv.  | 8             | 700 × 8                  | Model Parameters   |
+
+---
+
+To clarify the fourth column:  
+If the number of cycles is greater than one, the models were trained **separately on one condition per cycle**. After each training, one layer was **frozen** (see Figure 7), so that the trained values were not overwritten in the subsequent cycle.  
+
+- Example: In training cycle $x = 1$, no layer is frozen, and all layers are trained.  
+- To prevent the loss of all adjusted weights and the risk of the model being trained on only one state, in cycle $x = 2$, the **first layer** of the neural network is excluded from training and no longer updated.  
+
+The purpose of freezing layers as the training cycles progress is to investigate whether **targeted training of layers** influences the model’s performance.
+
+---
+
+**Figure 7:** Schematic representation of the training process showing how individual layers are "frozen" or excluded from training.
+
+For models 3, 4, 9, and 10, an additional training step was conducted. After the cycle-based training, the models were further trained with a dataset that combined **all conditions**, without freezing network layers separately.  
+This step was designed to strengthen the model’s ability to generalize across different initial conditions.
 
