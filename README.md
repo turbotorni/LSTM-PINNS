@@ -1,20 +1,22 @@
-## 3.1.2 Integration of Physical Properties
+### 3.1.2 Integration of Physical Properties
 
-To implement physical constraints that the model can utilize during learning, the conservation of energy and the compliance with the Lagrange equation were defined as physical constraints for the system, under the assumption that the double pendulum is a conservative system.
+To implement physical constraints that the model can use during learning, the double pendulum was assumed to be a conservative system. Therefore, **energy conservation** and compliance with the **Lagrange equation** were defined as physical constraints.
 
-### Energy Conservation
+#### Energy Conservation
 
-To check whether the double pendulum respects energy conservation in its motion, the total energy of the system at time *t* is compared with the energy in the predicted state at time *t+1*. The total energy $E_i$ is calculated from the system's kinetic energy $K$ and potential energy $V$:
+To check whether the double pendulum respects energy conservation, the total energy of the system at time $t$ is compared with the energy of the predicted state at time $t+1$.  
+The total energy $E_i$ is calculated from the kinetic energy $K$ and the potential energy $V$ of the system:
 
 $$
 E_i = K + V \tag{16}
 $$
 
-If energy conservation holds, the energy difference between time steps should be zero, as long as the data does not contain dynamics from different initial conditions. Accordingly, the following loss term is used, where $E_{i+1}$ is the energy of the predicted state and $E_i$ the original energy:
+If energy conservation holds, the energy difference between each time step should be zero, provided the data do not include dynamics with different initial conditions. Accordingly, the following term applies to the loss function, where $E_{i+1}$ is the energy of the predicted state and $E_i$ is the original energy:
 
 $$
-L_{Energy} = \left| E_{i+1} - E_i \right| \tag{17}
+L_{\text{Energy}} = \lvert E_{i+1} - E_i \rvert \tag{17}
 $$
+
 
 ### Compliance with the Lagrange Equation
 
