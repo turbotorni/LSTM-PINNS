@@ -1,6 +1,6 @@
 
 *Note: The original report has been written in German. I translated an the most crucial part of the report to english to get a better understanding of the code, however the plottitles and labels remained German, but I tried to make the plots easy to understand.
-## 3. Model Systems
+# 3. Model Systems
 
 In the following, we derive the approaches for physics-informed loss functions using a double pendulum (Figure 6a) and one-dimensional thermal diffusion (Figure 6b). These approaches are later tested and compared with classical ML models in **Chapter 5: Evaluation and Interpretation**.
 
@@ -12,13 +12,13 @@ Both systems enable a targeted investigation of physics-informed loss functions 
 The double pendulum is an example of a nonlinear, chaotic system, as it reacts sensitively to changes in initial conditions, making its motion difficult to predict.  
 In contrast, one-dimensional thermal diffusion is described by a linear partial differential equation, which is an advantage for ML models since linear systems are generally easier to learn and predict [10, 11].
 
-# 3.1 The Double Pendulum
+## 3.1 The Double Pendulum
 
 For comparing neural networks with physics-informed networks, we used the ML model created by Dennis Gannon for simulating a double pendulum as a **benchmark** [12]. Gannon's paper highlights that while LSTM networks perform well for simple systems like predicting a projectile's trajectory, they quickly reach their limits in more complex applications like the double pendulum, which exhibits chaotic behavior, allowing for precise prediction only for a few seconds [10].
 
 ---
 
-## 3.1.1 Dynamics of a Double Pendulum
+### 3.1.1 Dynamics of a Double Pendulum
 
 The dynamics of a double pendulum, as derived in [22], can be analytically determined using the **Lagrange equation**. This yields two solutions: one for the first pendulum and one for the second.
 
@@ -63,7 +63,7 @@ Taking the time derivative and solving the system of equations consisting of $\d
 
 The training data for the pendulum was generated using this approach, where $u$ corresponds to the **initial conditions**.
 
-# Integration of Physical Properties (Which equations have been used)
+# Integration of Physical Properties (PINN Integration-function)
 
 To implement physical constraints that the model can use during learning, the double pendulum was assumed to be a conservative system. Therefore, **energy conservation** and compliance with the **Lagrange equation** were defined as physical constraints.
 
