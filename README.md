@@ -8,7 +8,7 @@ To check whether the double pendulum respects energy conservation, the total ene
 The total energy $E_i$ is calculated from the kinetic energy $K$ and the potential energy $V$ of the system:
 
 $$
-E_{i} = K + V \tag{16}
+\left(E_{i}) = \right(K + V) \tag{16}
 $$
 
 If energy conservation holds, the energy difference between each time step should be zero, provided the data do not include dynamics with different initial conditions. Accordingly, the following term applies to the loss function, where $E_{i+1}$ is the energy of the predicted state and $E_i$ is the original energy:
