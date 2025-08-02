@@ -192,9 +192,13 @@ Among the trained models, significant differences are immediately apparent. Nota
 * "Energy Conservation" refers to the model trained with the physical information of energy conservation.
 * "Lagrange" refers to the model that incorporates the Lagrange formalism.
 
+<img width="688" height="370" alt="image" src="https://github.com/user-attachments/assets/9b5a85df-8d71-4550-9c79-fe35ae70a263" />
+
 **Figure 8: Pendulum motion state at 25%, 50%, 75%, and 100% of the total time**
 
 At the beginning of the simulation, all models remain close to the actual motion. For the physics-informed models, this state is nearly identical, whereas the precision of the data-based model (Dennis Gannon's benchmark) significantly deteriorates over time [12]. To investigate this behavior more closely, we plotted the prediction deviations of the models over time in **Figure 9**. The trend line, calculated from the absolute errors of the predicted angles and angular velocities, clearly shows how the benchmark's predictions, specifically the data-based model, significantly worsen over time.
+
+<img width="896" height="641" alt="image" src="https://github.com/user-attachments/assets/f1a06be7-644a-4085-9876-0391aa97201e" />
 
 **Figure 9: Prediction errors and trend lines of the absolute errors of the model over the simulation period**
 
@@ -202,9 +206,13 @@ Comparing the errors between the two physics-informed models reveals that both t
 
 The boxplot in **Figure 10** shows the median and spread of the deviation between predictions and test data for the entire simulation time. It's clear that the second pendulum arm exhibits larger deviations than the first arm, while the angular velocities show the largest error spread. Comparatively, the model trained with **energy conservation** performed best, though the difference from the Lagrange model is marginal. Across all models, predictions of angular velocities are less accurate.
 
+<img width="827" height="472" alt="image" src="https://github.com/user-attachments/assets/3e6bc0f7-f752-453b-9a94-b52f7f132383" />
+
 **Figure 10: Comparative representation of the prediction errors of the different models**
 
 This changes when the same models are tested on pendulum motion in a higher energy state, also known as a chaotic state [10]. Under this condition, the model errors in **Figure 11** are almost identical.
+
+<img width="827" height="472" alt="image" src="https://github.com/user-attachments/assets/3457c4de-e5ba-43c1-9e95-bf3dc01ba5b8" />
 
 **Figure 11: Comparison of different models tested on chaotic data**
 
@@ -216,13 +224,19 @@ Training is only meaningfully stopped when progress is marginal or the loss conv
 
 Observations showed that the MSE data loss quickly becomes very small during training, as errors are further reduced by squaring. Therefore, training with the MAE loss function is of particular interest. In **Figure 12**, the MSE training loss shows that the model makes little progress after approximately 1000 epochs, as both data loss and physics loss no longer show a significant decrease. Additionally, the model was tested on unseen data during training, with the test loss remaining almost constant throughout. This indicates that the model was fully trained very early, achieving only minimal improvements in the training set without positively impacting test performance.
 
+<img width="819" height="423" alt="image" src="https://github.com/user-attachments/assets/ea12cdce-ee01-4e82-bb31-62a61514c252" />
+
 **Figure 12: Losses and test results for training with Mean Squared Error (MSE) per training epoch over the entire training duration**
 
 Since the test loss is low, it demonstrates that the model generalizes well, and further training progress will have only minor effects on overall performance. The MAE training curve in **Figure 13** behaves similarly; the model quickly learned and made only small progress in training loss.
 
+<img width="861" height="450" alt="image" src="https://github.com/user-attachments/assets/1dfa5119-51ba-408c-b89c-40c3cd54f709" />
+
 **Figure 13: Losses and test results for training with Mean Absolute Error (MAE) per training epoch over the entire training duration**
 
 Notably, the physics losses in both training curves are many times larger than the data losses. As expected, the data losses for the MSE method were marginal compared to the MAE method. The similarity of the energy conservation losses and the test losses from **Figure 12** and **Figure 13** indicates that the choice between MSE and MAE loss functions has little influence on training and final performance. To investigate this influence more precisely, two models were trained without physical losses, using only either the MSE or MAE loss function, and compared in a boxplot in **Figure 14**. This plot provides a comparative view of the performance of both models.
+
+<img width="771" height="466" alt="image" src="https://github.com/user-attachments/assets/299f5b0a-168d-4e68-a0c9-477c65726747" />
 
 **Figure 14: Performance comparison of models trained with MSE or MAE loss functions**
 
@@ -233,6 +247,8 @@ The prediction errors differ minimally. Thus, the choice of the data-based loss 
 Previously, models were trained on a single initial condition. Now, we investigate the effect of training with multiple initial conditions. For this, PINNs were trained and tested on seven different initial conditions. Additionally, the models trained in **Section 5.1.4 "Parameter Study of Different Parameters"** were included in this test.
 
 This study examines various initial conditions and their resulting total kinetic energies. First, we conducted "Tests with known energies" as in **Table 3**, but with different initial conditions than those used during training. This is due to the split of the simulation dataset into training and test sets. As illustrated in **Figure 15**, the simulation begins with the training initial conditions and is split after 80% of the time for training and testing.
+
+<img width="517" height="108" alt="image" src="https://github.com/user-attachments/assets/5b01b1d4-b6a5-4c16-b748-9ea36339643e" />
 
 **Figure 15: Schematic representation of how simulation data was split into training and test datasets**
 
@@ -268,9 +284,13 @@ For evaluation, we examine the deviations between predicted and actual values of
 
 **Figure 17** summarizes the trained models from `Table 2` (please ensure this table exists and is correctly referenced) by their MAE for `theta1`, `theta2`, `omega1`, and `omega2` across the different test runs in a heatmap. The heatmap represents the data as a color-coded matrix, where MAE values are shown through varying color intensities. This allows for easy visual identification of models with low (better) and high (worse) deviations. Additionally, we've included further thresholds to better visualize the models' functionality in different MAE ranges and to more clearly differentiate their performance within specific value ranges. For better understanding of these thresholds, **Figure 16** provides a representative display of the actual and predicted pendulum motion for models that can be assigned to the existing threshold ranges.
 
+<img width="945" height="303" alt="image" src="https://github.com/user-attachments/assets/35fb898d-03b5-46d7-9c12-2672e084adf2" />
+
 **Figure 16: Pendulum motion over 25 seconds compared with model predictions with various mean absolute deviations**
 
 From the heatmap in **Figure 17**, it's evident that training models by specifically focusing on only one initial condition per cycle (see Models 5 and 6) can yield good results in tests with known energies. Further improvement can be achieved through additional training, as seen in Models 3 and 4, which were trained again with a mix of already trained initial conditions. Despite this, predictions in tests on an unknown system energy remain of limited representativeness due to the large mean absolute deviations of angular velocities.
+
+<img width="953" height="616" alt="image" src="https://github.com/user-attachments/assets/c4fd666b-ee1f-496e-ad54-30a168728da4" />
 
 **Figure 17: Heatmap comparing models using mean absolute deviations across corresponding test runs**
 
@@ -311,12 +331,15 @@ Since tests with the same parameters are quite close to the training data, we co
 | 8. | 2 | 1 | 3 | 3 |
 
 The evaluation, as described in Chapter 5.3 (please ensure this chapter exists and is correctly referenced), involves creating a heatmap in **Figure 19** based on the Mean Absolute Deviations (MAE) of the various models across the respective test runs. To simplify interpretation, we used selected thresholds to further characterize the cells, differentiating between usable and unusable models. **Figure 18** provides a representative illustration of these thresholds. **Figure 18a)**, showing the lowest observed mean deviations, accurately depicts the pendulum motion, whereas **Figure 18b)** only moderately represents the simulated data, and **Figure 18c)** is unusable.
+<img width="815" height="229" alt="image" src="https://github.com/user-attachments/assets/bd948d3f-3d39-4ce4-935d-f64bd426c1d6" />
 
 **Figure 18: Pendulum motion over 25 seconds compared with model predictions with various mean absolute deviations**
 
 **Figure 19** reveals that all models have greater difficulty predicting different model parameter combinations than different initial conditions. For Models 1, 2, 7, and 8, which were trained only with mixed initial conditions (Models 1 and 2) or mixed parameters (Models 7 and 8), the mean absolute deviation from the tests exceeds the thresholds for both angles and angular velocities. Therefore, this training method is the worst in this study.
 
 Models trained on various initial conditions generally perform worse than those whose training included model parameter combinations. However, models trained on different model parameters also struggle with predicting values. For models 9 to 12, only the test run with known model parameter combinations is representative. The **training method** in combination with the **model's dimensions** proves to be a crucial factor for model performance and should not be overlooked.
+
+<img width="920" height="575" alt="image" src="https://github.com/user-attachments/assets/90d987b3-5395-42ee-9068-2a824f9a5be2" />
 
 **Figure 19: Heatmap comparing models using mean absolute deviations across corresponding test runs**
 
