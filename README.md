@@ -1,5 +1,5 @@
 ****
-*Note: The original report was written in German. I translated the most crucial part into English to provide a better understanding of the code. However, the plot titles and labels remain in German. I aimed to make the plots easy to understand despite this.
+*Note: The original report was written in German. I translated the most crucial part into English to provide a better understanding of the code. However, the plot titles and labels remained in German. I aimed to make the plots easy to understand despite this.
 # 3. Model Systems
 
 In the following, we derive the approaches for physics-informed loss functions using a double pendulum (Figure 6a) and one-dimensional thermal diffusion (Figure 6b). These approaches are later tested and compared with classical ML models in **Chapter 5: Evaluation and Interpretation**.
